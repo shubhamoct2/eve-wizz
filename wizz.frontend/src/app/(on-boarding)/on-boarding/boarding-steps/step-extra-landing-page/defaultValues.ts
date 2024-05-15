@@ -1,4 +1,4 @@
-const defaultExtraLandingPageValues= {
+const defaultExtraLandingPageValues = {
     sectionTitle: '',
     sectionDescription: '',
     packageDealList: [

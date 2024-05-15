@@ -6,6 +6,8 @@ import TemplateBrand from "./tpl-brand"
 import TemplateFeature from "./tpl-feature"
 import TemplateEvent from "./tpl-event"
 import TemplateDates from "./tpl-dates"
+import TemplatePackage from './tpl-package'
+
 interface HeaderProps {
     logo?: string
     phone?: string
@@ -18,16 +20,17 @@ interface TemplateProps {
 
 export default function TemplatePreview(templateProps: TemplateProps) {
     const {header} = templateProps;
-    const logo = (header && null != header?.logo) ? header?.logo : EventWizzLogo	
+    const logo = (header && null != header?.logo) ? header?.logo : EventWizzLogo
     const phone = (header && null != header?.phone) ? header?.phone : 'Phone Number'
     return (
         <>
             <section className="app-wrapper w-full p-4 rounded border">
-                <TemplateHeader logo phone />
+                <TemplateHeader logo={logo} phone={phone} />
                 <TemplateBrand />
                 {/*<TemplateFeature/>*/}
                 <TemplateEvent/>
                 <TemplateDates/>
+                <TemplatePackage/>
             </section>
         </>
     )

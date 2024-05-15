@@ -3,10 +3,6 @@ const defaultVenueValues={
     phone: '',
     email: '',
     address:'',
-//    address: {
-//        title: '',
-//        latLng: ''
-//    },
     domain: '',
     description: '',
     logo: undefined,

@@ -97,7 +97,8 @@ export default function LoginForm() {
                     description:"Successfully logged in.",	
                     variant:"success"
                 })
-                router.push('/dashboard/');
+                window.location.href= '/dashboard/';
+//                router.push('/dashboard/');
                 setTimeout(()=>{
                     setLoading(false)	
                 },15000)

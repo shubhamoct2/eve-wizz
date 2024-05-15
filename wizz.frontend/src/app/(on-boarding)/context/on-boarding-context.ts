@@ -18,9 +18,9 @@ const registerVenue = async (data: any) => {
 const registerEvents = async (data: any) => {
     console.log(data, 'venueData')
 }
-const nextStep = (step=null) => {
+const nextStep = (step = null) => {
     console.log(step, 'nextStep')
-    
+
 }
 const previousStep = (step) => {
 
@@ -31,8 +31,12 @@ const gotToStep = (step) => {
 const activeStep = (step) => {
 
 }
+
+
+const stepperDefaultValues = Object.assign({}, defaultValues)
+
 export const OnBoardingContext = createContext<OnBoardingContextProps | null>({
-    values: defaultValues,
+    values: stepperDefaultValues,
     methods: {
         registerVenue,
         registerEvents,
