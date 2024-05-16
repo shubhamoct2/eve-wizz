@@ -12,12 +12,13 @@ export const metadata = {
 import OnBoardingContextProvider from "@/app/(on-boarding)/context/context-provider"
 
 const inter = Inter({subsets: ["latin"]});
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route"
 import SessionProvider from "@/components/providers/session-provider"
+
 export default async function OnBoardingLayout({
-                                             children,
-                                         }: Readonly<{
+                                                   children,
+                                               }: Readonly<{
     children: React.ReactNode;
 }>) {
     const containerStyle = {
@@ -32,17 +33,17 @@ export default async function OnBoardingLayout({
     return (
         <html lang="en">
         <body className={inter.className} style={bodyStyle}>
-            <SessionProvider session={session}> 
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Header/>
-            <main className="section mx-auto relative py-8" style={containerStyle}>
-                <OnBoardingContextProvider>
-                    {children}
-                </OnBoardingContextProvider>
-            </main>
-            {/*<Footer/>*/}
-        </ThemeProvider>
-        </SessionProvider>	
+        <SessionProvider session={session}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                <Header/>
+                <main className="section mx-auto relative py-8" style={containerStyle}>
+                    <OnBoardingContextProvider>
+                        {children}
+                    </OnBoardingContextProvider>
+                </main>
+                {/*<Footer/>*/}
+            </ThemeProvider>
+        </SessionProvider>
         <TailwindIndicator/>
         </body>
         </html>

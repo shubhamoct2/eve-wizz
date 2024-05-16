@@ -4,30 +4,12 @@ import ENDPOINTS from '@/lib/core/endpoints'
 import Cookies from 'js-cookie'
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const http = Axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
+        // 'Access-Control-Allow-Origin': '*',
+        // 'Content-type': 'application/json',
     },
     withCredentials: true,
     withXSRFToken: true
@@ -35,12 +17,12 @@ const http = Axios.create({
 
 http.interceptors.request.use(config => {
     const authToken = Cookies.get('apiToken');
-    console.log(authToken,' authToken');
+    console.log(authToken, ' authToken');
     if (authToken) {
         config.headers.Authorization = `Bearer ${authToken}`;
     }
     return config;
-}); 
+});
 
 
 http.interceptors.response.use(

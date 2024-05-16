@@ -6,7 +6,7 @@ namespace Modules\Abstracts\Controllers {
 
     abstract class ApiController extends Controller
     {
-        use ResponseTrait;
+//         use ResponseTrait;
 
         public string $requestType = 'api';
     }

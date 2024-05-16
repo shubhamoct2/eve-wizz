@@ -15,11 +15,11 @@ namespace Modules\Owner\Venue\Http\Controllers\Api {
         public function __invoke(StoreVenuesRequest $request, StoreVenuesAction $action)
         {
             try {
-                $entity = $action->handle($request);
-                $data = $this->transform($entity->toArray(), VenueTransformer::class);
-                dd($data);
 
-                return $this->created();
+                $entity = $action->handle($request);
+                return response()->json(['venue'=>$entity]);
+//                 $data = $this->transform($entity->toArray(), VenueTransformer::class);
+//                 return $this->created();
             } catch (\Exception $e) {
                 return response()->error($e->getMessage(), Response::HTTP_UNAUTHORIZED);
             }

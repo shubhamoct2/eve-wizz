@@ -7,13 +7,17 @@ import Icons from "@/components/icons";
 import {redirect, usePathname} from 'next/navigation';
 import {ThemeToggle} from "@/components/providers/theme-toggle";
 import {useState} from "react";
+import {useSession} from "next-auth/react";
+import {UserNav} from "@/layouts/dashboard/header/user-nav";
 
 export default function AuthNav() {
     const pathname = usePathname();
     const [loggedIn, setLoggedIn] = useState(false);
+    const {data: session} = useSession()
+
     return (
         <nav className="flex items-center gap-2">
-            {(!loggedIn) ? (
+            {(!session) ? (
                 <>
                     <Button variant="outline" className="flex space-x-2 p-0">
                         <Link href={'/auth/register'} className="flex space-x-2 p-3 items-center">
@@ -34,12 +38,7 @@ export default function AuthNav() {
                     </Button>
                 </>
             ) : (
-                <Button variant="secondary" className="p-0">
-                            <span className="login">
-                                <Icons.login/>
-                            </span>
-                    <span>Login</span>
-                </Button>
+                <UserNav/>
             )}
             <ThemeToggle/>
         </nav>

@@ -1,14 +1,15 @@
-import { LOGIN_URL } from "@/lib/apiEndPoints";
+import {LOGIN_URL} from "@/lib/apiEndPoints";
 import myAxios from "@/lib/axios.config";
-import axios, { AxiosResponse } from "axios";
-import { AuthOptions, ISODateString, User } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import axios, {AxiosResponse} from "axios";
+import {AuthOptions, ISODateString, User} from "next-auth";
+import {JWT} from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export interface CustomSession {
     user?: CustomUser;
     expires: ISODateString;
 }
+
 export interface CustomUser {
     id?: string | null;
     name?: string | null;
@@ -18,12 +19,13 @@ export interface CustomUser {
     created_at?: string | null;
     updated_at?: string | null;
 }
+
 export const authOptions: AuthOptions = {
     pages: {
         signIn: "/login",
     },
     callbacks: {
-        async jwt({ token, user, trigger, session }) {
+        async jwt({token, user, trigger, session}) {
             // * When we update the session
             if (trigger === "update" && session?.profile_image) {
                 const user: CustomUser = token.user as CustomUser;
@@ -37,10 +39,10 @@ export const authOptions: AuthOptions = {
         },
 
         async session({
-            session,
-            token,
-            user,
-        }: {
+                          session,
+                          token,
+                          user,
+                      }: {
             session: CustomSession;
             token: JWT;
             user: User;
@@ -62,17 +64,10 @@ export const authOptions: AuthOptions = {
                     email: credentials.email,
                     password: credentials.password,
                 };
-                
-                console.log(credentialDetails,' credentialDetails')
-                return;
-                
-                
 
-                if (user) {
-                    return user;
-                } else {
-                    return null;
-                }
+                console.log(credentialDetails, ' credentialDetails')
+                return;
+                return user ? user : null
             },
         }),
     ],

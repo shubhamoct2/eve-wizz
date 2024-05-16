@@ -1,10 +1,9 @@
 "use client";
 
-import {useContext, useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 import {useRouter} from "next/navigation";
 import {useSession} from "next-auth/react"
 import {Loader} from '@/components/ui/loader'
-
 //============STEPS=========//
 import StepOneVenue from './boarding-steps/step-venue'
 import StepTwoEvent from './boarding-steps/step-event'
@@ -19,28 +18,43 @@ import StepNineReminderEmail from './boarding-steps/step-extra-info'
 import StepTenReminderEmail from './boarding-steps/step-email-reminder'
 //============DEFAULT VALUES=========//
 import defaultValues from './boarding-steps/defaultValues'
+import VenueService from "@/services/venue/venue.service";
 
 export default function OnBoardingPage() {
     // ** Router
     const router = useRouter()
-    const [steps, setSteps] = useState();
-    const [activeStep, setActiveStep] = useState(3)
+    const [activeStep, setActiveStep] = useState(1)
     const [loading, setLoading] = useState(true)
     const {data: session} = useSession()
     const [eventType, setEventType] = useState('table')
     const [isEventTypeBoth, setIsEventTypeBoth] = useState(false);
 
+
+    //default venue
+    const [venueID, setVenueID] = useState(null);
+    const [venue, setVenue] = useState([])
+
+
     if (null === session) {
         router.push('/auth/login');
     }
+
+    const fetchVenue = VenueService.getDraftVenues();
 
 
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
         }, 1000)
-    }, [])
 
+        VenueService
+            .getDraftVenues()
+            .then((venue) => {
+                if (venue?.data) {
+                    setVenue(venue)
+                }
+            })
+    }, [])
 
     if (loading) {
         return (
@@ -55,12 +69,12 @@ export default function OnBoardingPage() {
         console.log(data, 'step-1');
         setActiveStep(2)
     }
-//stepTwoHandler
+    //stepTwoHandler
     const stepTwoHandler = (data: any) => {
         console.log(data, 'step-2');
         setActiveStep(3)
     }
-//stepThreeHandler
+    //stepThreeHandler
     const stepThreeHandler = (data: any) => {
         console.log(data, 'step-3');
         setEventType(data?.eventType)

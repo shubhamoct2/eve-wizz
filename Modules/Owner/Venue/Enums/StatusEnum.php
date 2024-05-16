@@ -9,6 +9,6 @@ namespace Modules\Owner\Venue\Enums {
         use InteractWithEnum;
 
         case Active = 1;
-        case InActive = 0;
+        case Draft = 0;
     }
 }

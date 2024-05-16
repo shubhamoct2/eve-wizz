@@ -12,8 +12,12 @@ const ENDPOINTS = {
     VERIFY_FORGET_PASSWORD: "/api/auth/verify-forget-password-token",
 
     TOKEN: "/sanctum/csrf-cookie",
-    EVENT:{
-        ALL_CATEGORIES:"/api/owner/event-categories"
+    EVENT: {
+        ALL_CATEGORIES: "/api/owner/event-categories"
+    },
+    VENUE: {
+        DRAFTS: '/api/owner/venues/drafts',
+        STORE: '/api/owner/venues'
     }
 }
 

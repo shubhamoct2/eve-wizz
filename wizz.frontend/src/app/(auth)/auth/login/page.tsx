@@ -7,20 +7,20 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import LoginForm from "@/app/(auth)/auth/login/login-form";
-import {useState,useEffect} from "react"
+import {useState, useEffect} from "react"
 import {useRouter} from 'next/navigation';
 //const {AuthContext} from "@/context/auth-context"
-import { useSession } from "next-auth/react"
+import {useSession} from "next-auth/react"
 
 const Page = () => {
     const [loading, setLoading] = useState(true);
-    const { data: session } = useSession()
+    const {data: session} = useSession()
     const router = useRouter()
-   
-    
+
+
     // redirect if logged in
-    
-    if(null !==session){
+
+    if (null !== session) {
         router.push('/dashboard')
     }
     useEffect(() => {
@@ -32,14 +32,13 @@ const Page = () => {
     if (loading) {
         return (
             <section className="w-full h-screen relative">
-            <div className="flex items-center justify-center h-full">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-200"></div>
-            </div>
+                <div className="flex items-center justify-center h-full">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-200"></div>
+                </div>
             </section>
-	
+
         );
     }
-
 
 
     return (
@@ -54,7 +53,7 @@ const Page = () => {
                 <LoginForm/>
             </CardContent>
         </Card>
-        )
+    )
 }
 
 export default Page

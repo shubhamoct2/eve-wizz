@@ -50,14 +50,26 @@ export default function StepOneVenue({activeStep, onClickHandler, template, temp
             email: venueInfo.email,
             address: venueInfo?.address,
             description: venueInfo?.description,
-            banner: selectedLogoImage,
+            logo: selectedLogoImage,
             landingPage: selectedLandingPageImage
         }
+        let formData = new FormData()
+        for (var key in payload) {
+            formData.append(key, payload[key])
+        }
+        methods?.registerVenue(payload);
+        return
         onClickHandler(payload)
     }
 
     //update default values
-    const defaultValuesOfVenue = values?.venue;
+    const defaultValuesOfVenue = Object.assign(values?.venue, {
+        phone: "4539583945",
+        email: "example@gmail.com",
+        name: "Venue Name",
+        address: "Venue Address",
+        description: "Venue description",
+    })
     // ** Hooks
     const {
         reset: venueReset,
@@ -70,7 +82,6 @@ export default function StepOneVenue({activeStep, onClickHandler, template, temp
         resolver: zodResolver(venueSchema)
     })
     const watchAllFields = watch() // when pass nothing as argument, you are watching everything
-
     const logoChangeHandler = (e: any) => {
         const newUrl = URL.createObjectURL(e.target.files?.[0]);
         if (newUrl !== logoUrl) {
@@ -80,7 +91,6 @@ export default function StepOneVenue({activeStep, onClickHandler, template, temp
             e.target.files?.[0] || null
         );
     }
-
     const landingPageImageHandler = (e: any) => {
         const newUrl = URL.createObjectURL(e.target.files?.[0]);
         if (newUrl !== landingPageUrl) {
@@ -90,6 +100,14 @@ export default function StepOneVenue({activeStep, onClickHandler, template, temp
             e.target.files?.[0] || null
         );
     }
+    const saveVenue = () => {
+        const values = Object.assign(watchAllFields, {
+            logo: selectedLogoImage,
+            landingPage: selectedLandingPageImage
+        })
+        methods?.registerVenue(values);
+    }
+
     return (
         <section className="steps-counter h-screen w-full">
             <section className="step-1 flex w-full justify-between">
@@ -379,7 +397,7 @@ export default function StepOneVenue({activeStep, onClickHandler, template, temp
 
                                 <article className={"flex w-full px-4 my-4 space-x-4 justify-end"}>
                                     <section className={"w-1/2 space-x-4 flex justify-end"}>
-                                        <Button>Save</Button>
+                                        <Button type="button" onClick={saveVenue}>Save</Button>
                                         <Button type={"submit"}>Next</Button>
                                     </section>
                                 </article>

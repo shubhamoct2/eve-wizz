@@ -47,9 +47,7 @@ namespace Modules\Abstracts\Transformers {
             try {
                 return parent::callIncludeMethod($scope, $includeName, $data);
             } catch (\ErrorException $exception) {
-//                 if (Config::get('requests.force-valid-includes', true)) {
                     throw new UnsupportedFractalIncludeException($exception->getMessage());
-//                 }
             } catch (\Exception $exception) {
                 throw new CoreInternalErrorException($exception->getMessage());
             }

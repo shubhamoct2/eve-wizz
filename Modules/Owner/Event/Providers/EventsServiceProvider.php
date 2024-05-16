@@ -5,7 +5,7 @@ namespace Modules\Owner\Venue\Providers {
     use Illuminate\Support\ServiceProvider as LaravelAppServiceProvider;
     use Illuminate\Support\Facades\Route;
 
-    class VenueServiceProvider extends LaravelAppServiceProvider
+    class EventsServiceProvider extends LaravelAppServiceProvider
     {
         public function boot()
         {

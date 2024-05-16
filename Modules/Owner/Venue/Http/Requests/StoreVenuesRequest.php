@@ -15,8 +15,9 @@ namespace Modules\Owner\Venue\Http\Requests {
         {
             return [
                 'name'      => ['required', 'min:4', 'max:255'],
-                'contact'   => ['required', 'min:4', 'max:255'],
-                'email'     => ['required', 'email', 'unique:venues,email,' . ($this->id)],
+                'phone'     => ['required', 'min:4', 'max:255'],
+                'email'     => ['required', 'email'],
+//                  'email'     => ['required', 'email', 'unique:venues,email,' . ($this->id)],
                 'address'   => ['required', 'min:4', 'max:255']
             ];
         }

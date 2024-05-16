@@ -69,7 +69,6 @@ namespace Modules\Abstracts\Traits {
             $fractal = Fractal::create($data, $transformer)
                 ->withResourceName($resourceKey)
                 ->addMeta($this->metaData);
-dd($fractal);
             // read includes passed via query params in url
             $requestIncludes = $this->parseRequestedIncludes();
 

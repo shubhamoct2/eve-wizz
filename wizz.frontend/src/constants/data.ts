@@ -1,5 +1,5 @@
-import { Icons } from "@/components/icons";
-import { NavItem, SidebarNavItem } from "@/types";
+import {Icons} from "@/components/icons";
+import {NavItem, SidebarNavItem} from "@/types";
 
 export type User = {
     id: number;
@@ -90,7 +90,7 @@ export const users: User[] = [
         verified: false,
         status: "Active",
     },
-    ];
+];
 
 export type Employee = {
     id: number;
@@ -119,33 +119,45 @@ export const navItems: NavItem[] = [
         label: "Dashboard",
     },
     {
-        title: "User",
-        href: "/dashboard/user",
+        title: "Events",
+        href: "/dashboard/events",
         icon: "user",
-        label: "user",
+        label: "events",
     },
     {
-        title: "Employee",
-        href: "/dashboard/employee",
-        icon: "employee",
-        label: "employee",
+        title: "Customers",
+        href: "/dashboard/customers",
+        icon: "check",
+        label: "customers",
     },
     {
-        title: "Profile",
-        href: "/dashboard/profile",
-        icon: "profile",
-        label: "profile",
+        title: "History",
+        href: "/dashboard/history",
+        icon: "sun",
+        label: "history",
     },
     {
-        title: "Kanban",
-        href: "/dashboard/kanban",
-        icon: "kanban",
-        label: "kanban",
+        title: "Email Templates",
+        href: "/dashboard/email-templates",
+        icon: "billing",
+        label: "email-templates",
     },
     {
-        title: "Login",
-        href: "/",
-        icon: "login",
-        label: "login",
+        title: "Menu Choices",
+        href: "/dashboard/menu-choices",
+        icon: "settings",
+        label: "menu-choices",
     },
-    ];
+    {
+        title: "Payments",
+        href: "/dashboard/payments",
+        icon: "trash",
+        label: "payments",
+    },
+    {
+        title: "Gallery",
+        href: "/dashboard/gallery",
+        icon: "pizza",
+        label: "gallery",
+    },
+];

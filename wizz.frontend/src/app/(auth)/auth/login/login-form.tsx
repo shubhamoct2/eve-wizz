@@ -11,13 +11,14 @@ import {validateLoginForm} from "@/lib/auth";
 import {useAuth} from "@/hooks/auth";
 import {Checkbox} from "@/components/ui/checkbox";
 import {toast} from "@/components/ui/use-toast";
-import { Loader2 } from 'lucide-react';
+import {Loader2} from 'lucide-react';
 import {useForm} from "react-hook-form";
 import {AuthService} from "@/services/auth/auth.service";
-import { signIn } from "next-auth/react";
+import {signIn} from "next-auth/react";
 import Axios from "@/lib/core/http";
 import {useRouter} from 'next/navigation';
 import {capitalize} from "@/lib/utils"
+
 export default function LoginForm() {
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter()
@@ -38,12 +39,12 @@ export default function LoginForm() {
 
     const handleGoogleLogin = async () => {
         try {
-            const user =     signIn("credentials", {
+            const user = signIn("credentials", {
                 email: authState.email,
                 password: authState.password,
                 redirect: true,
                 callbackUrl: "/",
-                });	
+            });
             if (user) {
                 console.log(user, ' user');
             } else {
@@ -71,53 +72,50 @@ export default function LoginForm() {
 
 
     const handleLoginForm = async (formData) => {
-        console.log('data',formData)
+        console.log('data', formData)
         setLoading(true)
         try {
-            const loginQuery = await  signIn("credentials", {
+            const loginQuery = await signIn("credentials", {
                 email: formData.email,
                 password: formData.password,
-                remember:formData?.remember,
+                remember: formData?.remember,
                 redirect: false,
                 callbackUrl: "/",
-                });
-            console.log(loginQuery,'loginQuery')
-            
-            if(loginQuery?.error){
+            });
+            console.log(loginQuery, 'loginQuery')
+
+            if (loginQuery?.error) {
                 toast({
                     title: "Error",
                     description: "Credentials did not match our records.	",
                     variant: "destructive"
-                    })
-            }
-            
-            if (loginQuery?.error ==null && (loginQuery?.status ==200 || loginQuery?.ok ==true)) {
-                toast({
-                    title:"Success",
-                    description:"Successfully logged in.",	
-                    variant:"success"
                 })
-                window.location.href= '/dashboard/';
+            }
+
+            if (loginQuery?.error == null && (loginQuery?.status == 200 || loginQuery?.ok == true)) {
+                toast({
+                    title: "Success",
+                    description: "Successfully logged in.",
+                    variant: "success"
+                })
+                window.location.href = '/dashboard/';
 //                router.push('/dashboard/');
-                setTimeout(()=>{
-                    setLoading(false)	
-                },15000)
-            } else{
-                const {error}=loginQuery;
-                const {errors}=JSON.parse(error)
-if(errors){
-    Object.entries(errors).forEach((e)=>{
-        const[key,val]=e;
-        toast({
-            title: (typeof key === "string") ? capitalize(key) : key,
-            description: val,
-            variant: "destructive"
-        })
-    })
-} 
-
-                console.log(loginQuery?.error,' loginQueryloginQuery')
-
+                setTimeout(() => {
+                    setLoading(false)
+                }, 15000)
+            } else {
+                const {error} = loginQuery;
+                const {errors} = JSON.parse(error)
+                if (errors) {
+                    Object.entries(errors).forEach((e) => {
+                        const [key, val] = e;
+                        toast({
+                            title: (typeof key === "string") ? capitalize(key) : key,
+                            description: val,
+                            variant: "destructive"
+                        })
+                    })
+                }
                 setLoading(false)
             }
         } catch (error) {
@@ -140,7 +138,7 @@ if(errors){
                         {...register("email", {required: true})}
 
                     />
-                    {errors.email && <Error error={"Email is required"}/>}
+                    {errors.email && <Error message={"Email is required"}/>}
                 </article>
                 <article className="grid gap-2 my-2">
                     <div className="flex items-center">
@@ -154,34 +152,33 @@ if(errors){
                         {...register("password", {required: true})}
 
                     />
-                    {errors.password && <Error error={"Password is required"}/>}
+                    {errors.password && <Error message={"Password is required"}/>}
                 </article>
 
                 <article className="grid gap-2">
                     <div className="flex items-center space-x-2">
                         <Checkbox
                             id="remember_me"
-                            name="remember"
                             className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             {...register("remember")}
-                            
+
                         />
                         <label
                             htmlFor="remember_me"
                             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                            >
+                        >
                             Remember Me
                         </label>
                     </div>
                 </article>
                 <article className={"flex justify-between gap-2"}>
-                <Button type="submit"
-                    disabled={loading}
-                    className={`w-full group-invalid:pointer-events-none group-invalid:opacity-30`}>
-                    {loading ? 'Loading...' : 'Login'}
-                </Button>
+                    <Button type="submit"
+                            disabled={loading}
+                            className={`w-full group-invalid:pointer-events-none group-invalid:opacity-30`}>
+                        {loading ? 'Loading...' : 'Login'}
+                    </Button>
                 </article>
-                
+
                 <article className={"flex justify-between gap-2"}>
                     <Button type={"button"} onClick={() => handleGoogleLogin()} variant="outline" className="w-full">
                         <Icons.google className={"h-3 w-3 mr-2"}/> Login with Google
@@ -200,5 +197,5 @@ if(errors){
                 </Link>
             </article>
         </form>
-        )
+    )
 }

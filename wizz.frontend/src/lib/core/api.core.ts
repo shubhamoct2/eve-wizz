@@ -6,6 +6,20 @@ class CoreApi {
     constructor(public _base_path: string | null) {
     }
 
+    request(url: string) {
+        try {
+            return this.http.request(url)
+                .then(response => {
+                    return response
+                })
+                .catch(error => {
+                    return error
+                })
+        } catch (error) {
+            return error;
+        }
+    }
+
     get(url: string) {
         try {
             return this
@@ -26,7 +40,7 @@ class CoreApi {
         try {
             return this
                 .http
-                .post(url, data)
+                .post(url, data, options)
                 .then((queryResponse) => {
                     return queryResponse?.data
                 })

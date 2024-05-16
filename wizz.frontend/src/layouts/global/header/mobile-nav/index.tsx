@@ -11,11 +11,14 @@ import {appConfig, mainNav} from "@/config/app";
 import {ScrollArea} from '@/components/ui/scroll-area';
 import {ThemeToggle} from "@/components/providers/theme-toggle";
 import MobileLink from "@/layouts/global/header/mobile-nav/mobile-link";
+import {useSession} from "next-auth/react";
 
 export function MobileNav() {
     const [open, setOpen] = React.useState(false)
     const pathname = usePathname();
     const buttonClass = "flex space-x-2 w-full items-center";
+    const {data: session} = useSession()
+
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>

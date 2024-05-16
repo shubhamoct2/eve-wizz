@@ -11,14 +11,15 @@ namespace App\Models\Venue {
     use App\Models\Auth\User;
     use Modules\Abstracts\Models\Model as ParentModel;
     use Modules\Abstracts\Traits\GenerateUniqueSlugTrait;
+    use Spatie\MediaLibrary\HasMedia;
+    use Spatie\MediaLibrary\InteractsWithMedia;
 
-    class Venue extends ParentModel
+    class Venue extends ParentModel implements HasMedia
     {
+        use InteractsWithMedia;
         use GenerateUniqueSlugTrait;
         use HasFactory, VenueRelationships;
         use VenueEvents;
-
-
 
         protected $slugKey = 'name';
 
@@ -34,7 +35,7 @@ namespace App\Models\Venue {
             'slug',
             'description',
             'featured_image',
-            'contact',
+            'phone',
             'email',
             'address',
             'status',
@@ -87,6 +88,14 @@ namespace App\Models\Venue {
                 'featured_image' => $this->featured_image,
                 'status' => $this->status,
             ];
+        }
+
+
+        // Define other relationships and properties here
+
+        public function media()
+        {
+            return $this->morphMany(\Spatie\MediaLibrary\MediaCollections\Models\Media::class, 'model');
         }
     }
 }
